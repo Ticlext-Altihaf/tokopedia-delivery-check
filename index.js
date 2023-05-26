@@ -40,6 +40,7 @@ async function main() {
             }
         } catch (error) {
             console.log(error)
+            doNotification("Error", error + "")
         }
     }
 }
@@ -60,12 +61,13 @@ function handleData(data){
             //alert
             const title = new_track_history.city
             const message =  new_track_history.date_time + " " + new_track_history.status
+            console.log(`[${new Date().toLocaleString()}] [${title}] ${message}`)
             doNotification(title, message)
         }
 
 
     }else{
-        console.log("Expected data.logistic_tracking.data.track_order but got: ", data)
+        throw new Error("Expected data.logistic_tracking.data.track_order but got: " + data)
     }
 
 }
